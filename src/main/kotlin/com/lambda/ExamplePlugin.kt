@@ -1,23 +1,23 @@
 package com.lambda
 
-import com.lambda.client.LambdaMod
+import com.lambda.client.gui.clickgui.LambdaClickGui
+import com.lambda.client.gui.clickgui.component.DownloadMusicButton
+import com.lambda.client.gui.clickgui.component.PlayMusicButton
+import com.lambda.client.gui.clickgui.component.PluginWindow
+import com.lambda.client.gui.rgui.windows.ListWindow
 import com.lambda.client.plugin.api.Plugin
-import com.lambda.client.util.threads.BackgroundJob
-import com.lambda.commands.ExampleCommand
-import com.lambda.huds.ExampleLabelHud
-import com.lambda.managers.ExampleManager
-import com.lambda.modules.ExampleModule
 
 internal object ExamplePlugin : Plugin() {
 
     override fun onLoad() {
-        // Load any modules, commands, or HUD elements here
-        modules.add(ExampleModule)
-        commands.add(ExampleCommand)
-        hudElements.add(ExampleLabelHud)
-        managers.add(ExampleManager)
-
-        bgJobs.add(BackgroundJob("ExampleJob", 10000L) { LambdaMod.LOG.info("Hello its me the BackgroundJob of your example plugin.") })
+        var posX = 0.0f
+        var posY = 0.0f
+        val windows_ = ArrayList<ListWindow>()
+        var musicWindow = PluginWindow("Music", posX, posY) //need to find a hacky way to use that
+        musicWindow.add(PlayMusicButton)
+        musicWindow.add(DownloadMusicButton)
+        windows_.add(musicWindow)
+        LambdaClickGui.windowList.addAll(windows_)
     }
 
     override fun onUnload() {

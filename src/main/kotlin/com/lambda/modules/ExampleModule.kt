@@ -1,6 +1,7 @@
 package com.lambda.modules
 
 import com.lambda.ExamplePlugin
+import com.lambda.client.commons.interfaces.DisplayEnum
 import com.lambda.client.event.SafeClientEvent
 import com.lambda.client.event.events.PlayerAttackEvent
 import com.lambda.client.mixin.extension.syncCurrentPlayItem
@@ -40,6 +41,7 @@ internal object ExampleModule : PluginModule(
     init {
         safeListener<PlayerInteractEvent.LeftClickBlock> {
             if (shouldMoveBack || !switchBack.value) equipBestTool(world.getBlockState(it.pos))
+
         }
 
         safeListener<PlayerAttackEvent> {
